@@ -1,6 +1,5 @@
-// DepartureList.js
 import React, { Component } from 'react';
-import DepartureTable from './DepartureTable'; // Asegúrate de tener la ruta correcta
+import DepartureTable from './DepartureTable'; 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +24,7 @@ class DepartureList extends Component {
 
       if (!this.state.initialLoad && data.length > this.state.departures.length) {
         const newRecord = data[data.length - 1];
-        this.showNotification(`Nuevo Departure: ${newRecord.flightNumber} hacia ${newRecord.destination}`);
+        this.showNotification(`NEW Departure: ${newRecord.flightNumber} destination ${newRecord.destination}`);
       }
 
       this.setState({
@@ -40,7 +39,7 @@ class DepartureList extends Component {
   showNotification = (message) => {
     toast.success(message, {
       position: 'bottom-right',
-      autoClose: false, // No cerrar automáticamente
+      autoClose: false, // Don't close auto
       hideProgressBar: true,
       closeOnClick: false,
     });

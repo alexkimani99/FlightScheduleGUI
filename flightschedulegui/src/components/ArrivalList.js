@@ -1,6 +1,5 @@
-// ArrivalList.js
 import React, { Component } from 'react';
-import ArrivalTable from './ArrivalTable'; // Asegúrate de tener la ruta correcta
+import ArrivalTable from './ArrivalTable'; // Make sure you have the correct path
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,7 +14,7 @@ class ArrivalList extends Component {
 
   componentDidMount() {
     this.fetchArrivals();
-    setInterval(this.fetchArrivals, 10000);
+    setInterval(this.fetchArrivals, 500); // Fetch arrivals every 5 seconds
   }
 
   fetchArrivals = async () => {
@@ -24,8 +23,9 @@ class ArrivalList extends Component {
       const data = await response.json();
 
       if (!this.state.initialLoad && data.length > this.state.arrivals.length) {
+        // Show a notification if there is a new DDBB entry, while its not the first load
         const newRecord = data[data.length - 1];
-        this.showNotification(`Nuevo Arrival: ${newRecord.flightNumber} desde ${newRecord.origin}`);
+        this.showNotification(`New Arrival: ${newRecord.flightNumber} from ${newRecord.origin}`);
       }
 
       this.setState({
@@ -40,7 +40,7 @@ class ArrivalList extends Component {
   showNotification = (message) => {
     toast.success(message, {
       position: 'bottom-right',
-      autoClose: false, // No cerrar automáticamente
+      autoClose: false, // Do not close automatically
       hideProgressBar: true,
       closeOnClick: false,
     });
