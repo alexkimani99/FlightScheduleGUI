@@ -1,47 +1,60 @@
 // ArrivalList.js
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import ArrivalTable from './ArrivalTable'; // Asegúrate de tener la ruta correcta
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ArrivalList = () => {
-  const [arrivals, setArrivals] = useState([]);
-
-  useEffect(() => {
-    const fetchArrivals = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/v1/api/flights/arrivals');
-        const data = await response.json();
-
-        if (arrivals.length < data.length) {
-          const newRecord = data[data.length - 1];
-          toast.success(`Nuevo Arrival: ${newRecord.flightNumber} desde ${newRecord.origin}`, {
-            position: 'bottom-right',
-            autoClose: 5000, // 5 segundos
-            hideProgressBar: true,
-          });
-        }
-
-        setArrivals(data);
-      } catch (error) {
-        console.error('Error fetching arrivals:', error);
-      }
+class ArrivalList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      arrivals: [],
+      initialLoad: true,
     };
+  }
 
-    fetchArrivals();
+  componentDidMount() {
+    this.fetchArrivals();
+    setInterval(this.fetchArrivals, 10000);
+  }
 
-    const intervalId = setInterval(fetchArrivals, 10000);
+  fetchArrivals = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/v1/api/flights/arrivals');
+      const data = await response.json();
 
-    return () => clearInterval(intervalId);
-  }, [arrivals]);
+      if (!this.state.initialLoad && data.length > this.state.arrivals.length) {
+        const newRecord = data[data.length - 1];
+        this.showNotification(`Nuevo Arrival: ${newRecord.flightNumber} desde ${newRecord.origin}`);
+      }
 
-  return (
-    <div>
-      <h1>Lista de Llegadas</h1>
-      <ArrivalTable arrivals={arrivals} />
-      <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar />
-    </div>
-  );
-};
+      this.setState({
+        arrivals: data,
+        initialLoad: false,
+      });
+    } catch (error) {
+      console.error('Error fetching arrivals:', error);
+    }
+  };
+
+  showNotification = (message) => {
+    toast.success(message, {
+      position: 'bottom-right',
+      autoClose: false, // No cerrar automáticamente
+      hideProgressBar: true,
+      closeOnClick: false,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1 className="display-4 mb-4">Arrival List</h1>
+        <ArrivalTable arrivals={this.state.arrivals} />
+        <ToastContainer position="bottom-right" />
+      </div>
+    );
+  }
+}
 
 export default ArrivalList;

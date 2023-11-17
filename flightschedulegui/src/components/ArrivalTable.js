@@ -16,7 +16,7 @@ const ArrivalTable = ({ arrivals }) => (
     </thead>
     <tbody>
       {arrivals.map(arrival => (
-        <tr key={arrival.id} className="table-light">
+        <tr key={arrival.id}>
           <td>{arrival.airport}</td>
           <td>{arrival.flightStatus}</td>
           <td>{arrival.aircraftType}</td>

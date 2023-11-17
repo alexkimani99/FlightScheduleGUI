@@ -1,26 +1,22 @@
-
+// DepartureTable.js
 import React from 'react';
 
 const DepartureTable = ({ departures }) => (
-  <table className="table table-bordered" style={{ backgroundColor: '#e6f7ff' }}>
-    <thead style={{ backgroundColor: '#99c2ff' }}>
+  <table className="table table-bordered table-hover" style={{ backgroundColor: '#e6f7ff' }}>
+    <thead className="thead-dark">
       <tr>
-        <th>Aeropuerto</th>
-        <th>Estado del Vuelo</th>
-        <th>Tipo de Aeronave</th>
-        <th>Número de Vuelo</th>
-        <th>Destino</th>
+        <th>Airport</th>
+        <th>Flight Number</th>
+        <th>Destination</th>
         <th>ETD</th>
-        <th>Total de Pasajeros</th>
-        <th>Total de Equipaje</th>
+        <th>Total Passengers</th>
+        <th>Total Luggage</th>
       </tr>
     </thead>
     <tbody>
       {departures.map(departure => (
         <tr key={departure.id}>
           <td>{departure.airport}</td>
-          <td>{departure.flightStatus}</td>
-          <td>{departure.aircraftType}</td>
           <td>{departure.flightNumber}</td>
           <td>{departure.destination}</td>
           <td>{departure.estimatedTimeOfDeparture}</td>
