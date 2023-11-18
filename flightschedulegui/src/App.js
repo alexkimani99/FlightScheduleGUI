@@ -5,9 +5,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
-    <div style={{ backgroundColor: '#add8e6', minHeight: '100vh', padding: '20px' }}>
-      <div className="container mt-5 text-center" style={{ color: '#001f3f' }}>
-        <h1 className="display-4 mb-4">OPERATIONS | Flight Schedule APP</h1>
+    <div>
+      {/* Cover Section */}
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: '100vh', backgroundColor: '#343a40', color: 'white', marginBottom: '50px' }}
+      >
+        <div className="text-center">
+          <h1 className="display-3 mb-4">Flight Schedule App</h1>
+          <p className="lead">Effortlessly manage and explore flight schedules.</p>
+          {/* Add any other introductory content */}
+        </div>
+      </div>
+
+      {/* App Section */}
+      <div className="container text-center" style={{ color: '#001f3f' }}>
+        <h2 className="display-4 my-4">OPERATIONS | Flight Schedule</h2>
         <div className="row">
           <div className="col-md-12">
             <ArrivalList />
@@ -19,6 +32,6 @@ const App = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;

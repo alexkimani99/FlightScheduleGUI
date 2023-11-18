@@ -26,8 +26,8 @@ const ArrivalTable = ({ arrivals }) => {
             <td>{arrival.flightNumber}</td>
             <td>{arrival.origin}</td>
             <td>{arrival.estimatedTimeOfArrival}</td>
-            <td>{arrival.totalPassengers}</td>
-            <td>{arrival.totalLuggage}</td>
+            <td style={{ color: 'red', fontWeight: 'bold' }}>{arrival.totalPassengers}</td>
+            <td style={{ color: 'orange', fontWeight: 'bold' }}>{arrival.totalLuggage}</td>
           </tr>
         ))}
       </tbody>
