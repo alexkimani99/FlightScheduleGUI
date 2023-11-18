@@ -1,6 +1,6 @@
 # FlightScheduleGUI
 
-FlightScheduleGUI es la interfaz de usuario para el proyecto FlightScheduleSV, realizado con React. Este README proporciona una descripción general del proyecto, su estructura, requisitos del sistema, cómo instalar y configurar la aplicación, así como ejemplos de uso y cómo contribuir al proyecto.
+FlightScheduleGUI es la interfaz de usuario para el proyecto FlightScheduleSV, realizado con React y maquetado con Bootstrap. Este README proporciona una descripción general del proyecto, su estructura, requisitos del sistema, cómo instalar y configurar la aplicación, así como ejemplos de uso y cómo contribuir al proyecto.
 
 ## Contenido
 
