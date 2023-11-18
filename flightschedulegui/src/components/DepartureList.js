@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DepartureTable from './DepartureTable'; 
+import DepartureTable from './DepartureTable';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,20 +22,18 @@ class DepartureList extends Component {
       const response = await fetch('http://localhost:8080/v1/api/flights/departures');
       const data = await response.json();
 
-      if (!this.state.initialLoad) {
-        data.forEach((newRecord) => {
-          // Verificar si la notificación debe mostrarse solo para operaciones POST
-          if (newRecord.method && newRecord.method.toLowerCase() === 'post') {
-            const notificationKey = `NEW Departure: ${newRecord.flightNumber} destination ${newRecord.destination}`;
-            this.showNotification(notificationKey);
-          }
-        });
-      }
+      const previousMaxId = this.state.departures.length > 0 ? Math.max(...this.state.departures.map(departure => departure.id)) : 0;
 
       this.setState({
         departures: data,
         initialLoad: false,
       });
+
+      // Check if there is a new entry by comparing the ID
+      if (!this.state.initialLoad && data.length > 0 && data[data.length - 1].id > previousMaxId) {
+        const newRecord = data[data.length - 1];
+        this.showNotification(`New Departure: ${newRecord.flightNumber} to ${newRecord.destination}`);
+      }
     } catch (error) {
       console.error('Error fetching departures:', error);
     }
@@ -44,7 +42,7 @@ class DepartureList extends Component {
   showNotification = (message) => {
     toast.success(message, {
       position: 'bottom-right',
-      autoClose: false, // No cerrar automáticamente
+      autoClose: false,
       hideProgressBar: true,
       closeOnClick: false,
     });

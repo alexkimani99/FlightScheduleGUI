@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ArrivalTable from './ArrivalTable'; 
+import ArrivalTable from './ArrivalTable'; // Make sure you have the correct path
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -14,32 +14,36 @@ class ArrivalList extends Component {
 
   componentDidMount() {
     this.fetchArrivals();
-    setInterval(this.fetchArrivals, 10000);
+    setInterval(this.fetchArrivals, 500); // Fetch arrivals every 5 seconds
   }
 
   fetchArrivals = async () => {
     try {
       const response = await fetch('http://localhost:8080/v1/api/flights/arrivals');
       const data = await response.json();
-
-      if (!this.state.initialLoad && data.length > this.state.arrivals.length) {
-        const newRecord = data[data.length - 1];
-        this.showNotification(`NEW Arrival: ${newRecord.flightNumber} from ${newRecord.origin}`);
-      }
-
+  
+      const previousMaxId = this.state.arrivals.length > 0 ? Math.max(...this.state.arrivals.map(arrival => arrival.id)) : 0;
+  
       this.setState({
         arrivals: data,
         initialLoad: false,
       });
+  
+      // Check if there is a new entry by comparing the ID
+      if (!this.state.initialLoad && data.length > 0 && data[data.length - 1].id > previousMaxId) {
+        const newRecord = data[data.length - 1];
+        this.showNotification(`New Arrival: ${newRecord.flightNumber} from ${newRecord.origin}`);
+      }
     } catch (error) {
       console.error('Error fetching arrivals:', error);
     }
   };
+  
 
   showNotification = (message) => {
     toast.success(message, {
       position: 'bottom-right',
-      autoClose: false, // Don't close auto
+      autoClose: false, // Do not close automatically
       hideProgressBar: true,
       closeOnClick: false,
     });

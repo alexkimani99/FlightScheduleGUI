@@ -13,12 +13,10 @@ const App = () => {
       >
         <div className="text-center">
           <h1 className="display-3 mb-4">Flight Schedule App</h1>
-          <p className="lead">Effortlessly manage and explore flight schedules.</p>
-          {/* Add any other introductory content */}
+          <p className="lead">Manage and explore arrivals and departures.</p>
         </div>
       </div>
 
-      {/* App Section */}
       <div className="container text-center" style={{ color: '#001f3f' }}>
         <h2 className="display-4 my-4">OPERATIONS | Flight Schedule</h2>
         <div className="row">
