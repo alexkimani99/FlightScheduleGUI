@@ -22,9 +22,14 @@ class DepartureList extends Component {
       const response = await fetch('http://localhost:8080/v1/api/flights/departures');
       const data = await response.json();
 
-      if (!this.state.initialLoad && data.length > this.state.departures.length) {
-        const newRecord = data[data.length - 1];
-        this.showNotification(`NEW Departure: ${newRecord.flightNumber} destination ${newRecord.destination}`);
+      if (!this.state.initialLoad) {
+        data.forEach((newRecord) => {
+          // Verificar si la notificación debe mostrarse solo para operaciones POST
+          if (newRecord.method && newRecord.method.toLowerCase() === 'post') {
+            const notificationKey = `NEW Departure: ${newRecord.flightNumber} destination ${newRecord.destination}`;
+            this.showNotification(notificationKey);
+          }
+        });
       }
 
       this.setState({
@@ -39,7 +44,7 @@ class DepartureList extends Component {
   showNotification = (message) => {
     toast.success(message, {
       position: 'bottom-right',
-      autoClose: false, // Don't close auto
+      autoClose: false, // No cerrar automáticamente
       hideProgressBar: true,
       closeOnClick: false,
     });

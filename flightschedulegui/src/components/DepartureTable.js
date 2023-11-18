@@ -5,6 +5,7 @@ const DepartureTable = ({ departures }) => (
   <table className="table table-bordered table-hover" style={{ backgroundColor: '#e6f7ff' }}>
     <thead className="thead-dark">
       <tr>
+        <th>ID</th>
         <th>Airport</th>
         <th>Flight Number</th>
         <th>Destination</th>
@@ -16,6 +17,7 @@ const DepartureTable = ({ departures }) => (
     <tbody>
       {departures.map(departure => (
         <tr key={departure.id}>
+          <td>{departure.id}</td>
           <td>{departure.airport}</td>
           <td>{departure.flightNumber}</td>
           <td>{departure.destination}</td>
