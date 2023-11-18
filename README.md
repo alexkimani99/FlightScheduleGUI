@@ -10,7 +10,6 @@ FlightScheduleGUI es la interfaz de usuario para el proyecto FlightScheduleSV, r
 4. [Despliegue](#despliegue)
 5. [Estructura de Componentes](#estructura-de-componentes)
 6. [Ejemplos de Uso](#ejemplos-de-uso)
-7. [Contribuir al Proyecto](#contribuir-al-proyecto)
 
 ## Estructura del Proyecto
 
