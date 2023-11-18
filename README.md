@@ -49,8 +49,8 @@ el Cross-Origin Resource Sharing (CORS) para hacer consultar a la API en el puer
 
 
 ## Estructura de Componentes
-ArrivalList.js y DepartureList.js: Contienen la lógica para las tablas de llegadas y salidas.
-ArrivalTable.js y DepartureTable.js: Pintan las tablas de llegadas y salidas, respectivamente.
+- ArrivalList.js y DepartureList.js: Contienen la lógica para las tablas de llegadas y salidas.
+- ArrivalTable.js y DepartureTable.js: Pintan las tablas de llegadas y salidas, respectivamente.
 
 ## Ejemplos de uso 
 La interfaz de usuario se integra con el backend FlightScheduleSV para realizar operaciones en las llegadas y salidas de vuelos.
