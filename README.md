@@ -42,7 +42,11 @@ Es necesario tener instalado [Node.js](https://nodejs.org/) y [npm](https://www.
    'npm install'.
 
 - Para lanzar la aplicación en modo desarrollo, **npm start**.
+La aplicación cargará en http://localhost:3000. Es importante mantener este puerto, ya que está habilitado de forma automática
+el Cross-Origin Resource Sharing (CORS) para hacer consultar a la API en el puerto 8080 del backend.
+
 - Para crear una versión optimizada para producción, **npm run build**
+
 
 ## Estructura de Componentes
 ArrivalList.js y DepartureList.js: Contienen la lógica para las tablas de llegadas y salidas.
